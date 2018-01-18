@@ -1,0 +1,24 @@
+{
+  "name": "dd-svg-web-generator",
+  "version": "1.0.0",
+  "description": "stand alone svg web generator for dd ai assets",
+  "main": "app.js",
+  "scripts": {
+    "start": "babel-node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andrey Orlov",
+  "license": "ISC",
+  "dependencies": {
+    "applescript": "^1.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2017": "^6.24.1",
+    "chokidar": "^2.0.0",
+    "file-loader": "^1.1.6",
+    "inquirer": "^5.0.0",
+    "jsonfile": "^4.0.0",
+    "mv": "^2.1.1",
+    "webpack-dev-middleware": "^2.0.4"
+  }
+}
