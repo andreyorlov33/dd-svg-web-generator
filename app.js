@@ -36,6 +36,7 @@ class App {
             let item = this.staged_files[i]
             await generate(item)
         }
+        close_all_docs()
         this.init()
     }
     clear(){

@@ -27,17 +27,17 @@ export default function generate(file){
        
         await run_svg_gen()
         await check_for_output()
-        close_all_docs()
+
         console.log(`svg asset ${file} generated`)
         
         fs.unlinkSync(temp_dir+'order.json')
         
-        
-       
         mv(processing_dir+file, processed_dir+file , err => err ? console.error(err): null)
         
         mv(`${generated_svg_dir}web_svg.svg`, `${svg_repo}${file_name}.svg`, err => err? console.error(err): null)
         
+        scrub()
+   
         resolve(`${file} Processed`)
     })
 }
@@ -54,3 +54,10 @@ function check_for_output() {
 }
 
 
+function scrub(){
+    if(fs.existsSync(generated_svg_dir+'web_svg1.png') || fs.existsSync(generated_svg_dir+'web_svg.svg')){
+        let files = fs.readdirSync(generated_svg_dir)
+        files = files.filter(item => !(/(^|\/)\.[^\/\.]/g).test(item))
+        files.forEach(file => fs.unlinkSync(generated_svg_dir+file))
+    }
+}
