@@ -26,18 +26,19 @@ export default function generate(file){
         await open_file_in_illustrator()
        
         await run_svg_gen()
+        
         await check_for_output()
 
-        console.log(`svg asset ${file} generated`)
+        close_all_docs()
         
-        fs.unlinkSync(temp_dir+'order.json')
+        console.log(`svg asset ${file} generated`)
         
         mv(processing_dir+file, processed_dir+file , err => err ? console.error(err): null)
         
         mv(`${generated_svg_dir}web_svg.svg`, `${svg_repo}${file_name}.svg`, err => err? console.error(err): null)
         
         scrub()
-   
+
         resolve(`${file} Processed`)
     })
 }
@@ -55,9 +56,7 @@ function check_for_output() {
 
 
 function scrub(){
-    if(fs.existsSync(generated_svg_dir+'web_svg1.png') || fs.existsSync(generated_svg_dir+'web_svg.svg')){
-        let files = fs.readdirSync(generated_svg_dir)
-        files = files.filter(item => !(/(^|\/)\.[^\/\.]/g).test(item))
-        files.forEach(file => fs.unlinkSync(generated_svg_dir+file))
-    }
+    fs.unlinkSync(temp_dir+'order.json')
+    fs.existsSync(generated_svg_dir+'web_svg.svg') ? fs.unlinkSync(generated_svg_dir+'web_svg.svg') : null
+    fs.existsSync(generated_svg_dir+'web_svg1.png') ? fs.unlinkSync(generated_svg_dir+'web_svg1.png') : null 
 }
