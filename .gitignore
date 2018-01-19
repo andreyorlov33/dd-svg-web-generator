@@ -3,3 +3,6 @@ generated_svgs
 input
 processed
 processing
+svg_repo
+.DS_Store
+temp/

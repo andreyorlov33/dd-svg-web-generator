@@ -1,9 +1,8 @@
 import fs from 'fs'
 import inquirer from 'inquirer'
-import chokidar from 'chokidar'
-import applescript from 'applesctipt'
-import run_script from './utils/run_illustrator'
 import * as prompt from './utils/prompts'
+import generate from './utils/generate'
+import {close_all_docs} from './utils/script_runner'
 
 const cli = inquirer.createPromptModule()
 
@@ -24,17 +23,25 @@ class App {
     start(){
         let files = fs.readdirSync('./input/')
         files = files.filter(item => !(/(^|\/)\.[^\/\.]/g).test(item))
-        this.staged_files = files
-        process.stdout.write('/n Following files are staged for generation')
+        this.staged_files = [...files]
+        process.stdout.write('\n Following files are staged for generation... \n')
         files.map(i => process.stdout.write(`${i} \n`))
         cli(prompt.start)
-        .then(answer => asnwer.start ? this.run_batch : process.exit(0))
+        .then(answer => answer.start ? this.run_batch() : process.exit(0))
     }
-    run_batch(){
-        this.staged_files.map( async i => await generate(i))
+    async run_batch(){
+        console.log('initiating batch process ... \n')
+        for(let i in this.staged_files){
+            console.log('*********************** \n')
+            let item = this.staged_files[i]
+            await generate(item)
+        }
         this.init()
     }
     clear(){
         process.stdout.write('\x1Bc')
     }
 }
+
+let intance = new App()
+intance.init()
