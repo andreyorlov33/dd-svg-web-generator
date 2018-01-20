@@ -35,7 +35,7 @@ function loadJSON(relPath) {
 
 export default function produce_ai_script(){
     try{
-        fs.writeFileSync(utils_folder+'/TEST.jsx', javascript_string, 'utf8')
+        fs.writeFileSync(utils_folder+'/ai_gen_script.jsx', javascript_string, 'utf8')
     }
     catch(e){
         console.error(e)
