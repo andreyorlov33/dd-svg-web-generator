@@ -47,7 +47,7 @@ function check_for_output(file_name) {
         let watcher = chokidar.watch(generated_svg_dir, params)
         watcher.on('add', (generated_svg_dir) => {
             let file = generated_svg_dir.split('\/').pop()
-             if(file == `${file_name}.svg`){resolve()}
+             if(file == `${file_name}.svg` || file == `${file_name}-01.svg` ){resolve()}
         })
     })
 }
