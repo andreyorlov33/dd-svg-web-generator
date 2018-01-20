@@ -33,7 +33,7 @@ export default function generate(file){
         
         mv(processing_dir+file, processed_dir+file , err => err ? console.error(err): null)
         
-        mv(`${generated_svg_dir}web_svg.svg`, `${svg_repo}${file_name}.svg`, err => err? console.error(err): null)
+        mv(`${generated_svg_dir}${file_name}-01.svg`, `${svg_repo}${file_name}.svg`, err => err? console.error(err): null)
         
         scrub()
 
