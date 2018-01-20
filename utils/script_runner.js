@@ -3,19 +3,9 @@ import path from 'path'
 
 const working_dir = path.join(__dirname+'/')
 
-
-export function run_svg_gen(){
+export function ai_generate_web_svg(){
     return new Promise ((resolve, reject)=>{
-        applescript.execFile(working_dir+'generation_action.applescript', (err, result)=>{
-            if(err){reject(err)}
-            resolve(result)
-        })
-    })
-}
-
-export function open_file_in_illustrator(){
-    return new Promise ((resolve, reject)=>{
-        applescript.execFile(working_dir+'open_svg.applescript', (err, result)=>{
+        applescript.execFile(working_dir+'ai_generate_web_svg.applescript', (err, result)=>{
             if(err){reject(err)}
             resolve('file opened')
         })

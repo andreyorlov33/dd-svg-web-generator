@@ -23,11 +23,9 @@ export default function generate(file){
        
         mv(input_dir+file, processing_dir+file, err => err? console.error(err): console.log(`asset ${file} moved to processing`))
        
-        await open_file_in_illustrator()
-       
-        await run_svg_gen()
-        
-        await check_for_output()
+        await ai_generate_web_svg()
+    
+        await check_for_output(file_name)
 
         close_all_docs()
         
@@ -43,13 +41,13 @@ export default function generate(file){
     })
 }
 
-function check_for_output() {
+function check_for_output(file_name) {
     return new Promise((resolve, reject) => {    
         let params = { persistent: true, ignoreInitial: false, ignore:  /(^|[\/\\])\../  }
         let watcher = chokidar.watch(generated_svg_dir, params)
         watcher.on('add', (generated_svg_dir) => {
             let file = generated_svg_dir.split('\/').pop()
-             if(file == 'web_svg.svg'){resolve()}
+             if(file == `${file_name}.svg`){resolve()}
         })
     })
 }
