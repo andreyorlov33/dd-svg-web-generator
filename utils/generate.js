@@ -1,7 +1,7 @@
 import jsonfile from 'jsonfile'
 import path from 'path'
 import mv from 'mv'
-import {run_svg_gen, open_file_in_illustrator, close_all_docs} from './script_runner'
+import { ai_generate_web_svg, close_all_docs} from './script_runner'
 import chokidar from 'chokidar'
 import fs from 'fs'
 
